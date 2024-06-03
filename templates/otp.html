@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{{message}}
+{% block base %}
+{% if message %}
+<span>{{message}}</span>
+{% endif %}
+    <form  method='POST'>
+        {% csrf_token %}
+        <label for="otp">OTP</label>
+<input type="text" name="otp">
+        <button>submit</button>
+    </form>
+{% endblock base %}
