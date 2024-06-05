@@ -31,6 +31,10 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'authUser',
     'rest_framework.authtoken',
+    'Cart',
+    'Order',
+    'product',
+    'Review'
 ]
 
 MIDDLEWARE = [
