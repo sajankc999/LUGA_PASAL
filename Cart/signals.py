@@ -7,4 +7,4 @@ from django.dispatch import receiver
 @receiver(post_save,sender=Buyer)
 def create_cart(instance,*args, **kwargs):
     if not Cart.objects.filter(buyer=instance).exists():
-        Cart.objects.create(Buyer=instance)
+        Cart.objects.create(buyer=instance)

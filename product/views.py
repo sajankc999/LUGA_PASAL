@@ -7,19 +7,8 @@ from .permissions import ProductPermission
 from rest_framework.response import Response
 from rest_framework import status
 import django_filters.rest_framework
-
-class SellerView(ModelViewSet):
-    serializer_class = SellerSerializer
-
-    def get_queryset(self):
-        
-        seller = Seller.objects.filter(user=self.request.user)
-        if seller:
-            return Seller.objects.filter(user = self.request.user)
-        if verify_admin(seller):
-            return Seller.objects.all()
-
-
+from rest_framework.permissions import AllowAny,IsAuthenticated
+from authUser.models import Seller,Buyer
 
 class ProductView(ModelViewSet):
     queryset=Product.objects.all()
@@ -58,3 +47,14 @@ class ProductSellerView(ModelViewSet):
                 return Response(serializer.data,status=status.HTTP_201_CREATED)
             else:
                 return Response(serializer.errors)
+            
+
+class PersonalizedFeedView(generics.ListAPIView):
+    serializer_class =ProductSerializer
+    permission_classes=[AllowAny]
+
+    def get_queryset(self):
+        user = self.request.user
+        raise Exception(user)
+
+        

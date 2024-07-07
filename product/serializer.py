@@ -1,19 +1,13 @@
 from .models import *
 from rest_framework import serializers
 
-class SellerSerializer(serializers.ModelSerializer):
-    user = serializers.HiddenField(default = serializers.CurrentUserDefault())
-    class Meta:
-        model = Seller
-        fields = "__all__"
-        extra_kwargs = {'user':{'read_only':'True'}}
-
-
 class ProductSerializer(serializers.ModelSerializer):
+    slug=serializers.CharField(required=False)
     class Meta:
         model = Product
         fields = '__all__'
         lookup_field = 'slug'
+        extra_kwargs ={'slug':{'read_only':True}}
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
